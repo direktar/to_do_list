@@ -12,17 +12,22 @@
     - elsif task.prioritize? || task.uncomplete?
       = link_to prioritize_project_task_path(@project, task.id), method: :patch do
         = render partial: "svgs/star"
-
-  .task-name
-    %p
-      = task.name
-      .task-edit-form
-        = form_for task, url: project_task_path(@project,   task.id), action: :update, method: :patch, html: { id: "edit-comment-#{task.id}", class: 'hidden' } do |f|
-          .comment-form-and-button
-            = f.text_area :name, class: "form-control", placeholder: true, required: "required", id: "task-name-#{task.id}"
-            = f.submit "Confirm", class: "btn btn-primary"
+  .middle-fields
+    .task-name
+      %p
+        = task.name
+        .task-edit-form
+          = form_for task, url: project_task_path(@project,   task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}", class: 'hidden' } do |f|
+            .task-form-and-button
+              = f.text_area :name, class: "form-control", placeholder: true, required: "required", id: "task-name-#{task.id}"
+              = f.submit "Confirm", class: "btn btn-primary"
+    .dead-line
+      = form_for [@project, task], url: project_task_path(@project,   task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}" }  do |f|
+        = f.text_field :deadline, id: "deadline-#{task.id}", class: "deadline", placeholder: "Select deadline", autocomplete: 'off'
+        = f.submit "Set", class: "btn btn-primary"
   .action
-    %button.toggle.btn.btn-primary{"aria-controls" => "edit-comment-#{task.id}"} Edit
+    .toggle
+      %button.btn.btn-primary{"aria-controls" => "edit-task-#{task.id}"} Edit
     .delete
       = button_to 'Delete', project_task_path(@project, task.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"
 

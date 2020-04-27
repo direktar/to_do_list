@@ -7,4 +7,6 @@
           %li= message
 
   .actions
-    = f.submit 'Save'
+    = f.text_field :name
+
+    = f.submit 'Save', class: "btn btn-success"

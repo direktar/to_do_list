@@ -16,10 +16,10 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_back fallback_location: @project, notice: 'Comment was successfully updated.' }
+        format.html { redirect_back fallback_location: @project, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { redirect_back fallback_location: @project, danger: 'Comment is not updated.' }
+        format.html { redirect_back fallback_location: @project, danger: 'Task is not updated.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -60,6 +60,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.fetch(:task, {}).permit(:name, :status, :project_id)
+    params.fetch(:task, {}).permit(:name, :status, :project_id, :deadline)
   end
 end
