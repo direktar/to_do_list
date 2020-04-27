@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @project_tasks = @project.tasks.order('status DESC, name')
   end
 
   # GET /projects/new
@@ -69,6 +70,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.fetch(:project, {})
+      params.fetch(:project, {}).permit(:name)
     end
 end

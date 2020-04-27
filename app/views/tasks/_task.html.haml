@@ -1,9 +1,18 @@
 %li
   .complete
-    - unless task.status?
-      = link_to "Complete",  complete_project_task_path(@project, task.id), method: :patch
+    - if task.uncomplete? || task.prioritize?
+      = link_to complete_project_task_path(@project, task.id), method: :patch do
+        = render partial: "svgs/square"
     - else
-      = link_to "UnComplete",  uncomplete_project_task_path(@project, task.id), method: :patch
+      = link_to uncomplete_project_task_path(@project, task.id), method: :patch do
+        = render partial: "svgs/checked"
+    - if task.prioritize?
+      = link_to uncomplete_project_task_path(@project, task.id), method: :patch do
+        = render partial: "svgs/star_fill"
+    - elsif task.prioritize? || task.uncomplete?
+      = link_to prioritize_project_task_path(@project, task.id), method: :patch do
+        = render partial: "svgs/star"
+
   .task-name
     %p
       = task.name
@@ -11,13 +20,9 @@
         = form_for task, url: project_task_path(@project,   task.id), action: :update, method: :patch, html: { id: "edit-comment-#{task.id}", class: 'hidden' } do |f|
           .comment-form-and-button
             = f.text_area :name, class: "form-control", placeholder: true, required: "required", id: "task-name-#{task.id}"
-            = f.submit "Reply", class: "btn btn-primary"
-  .crud
-    %button.toggle.btn.btn-primary{"aria-controls" => "edit-comment-#{task.id}"}
-      - if true
-        Edit
-      -else
-        Cancel
+            = f.submit "Confirm", class: "btn btn-primary"
+  .action
+    %button.toggle.btn.btn-primary{"aria-controls" => "edit-comment-#{task.id}"} Edit
     .delete
       = button_to 'Delete', project_task_path(@project, task.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"
 

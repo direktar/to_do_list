@@ -34,14 +34,19 @@ class TasksController < ApplicationController
     redirect_to @project
   end
 
+  def uncomplete
+    @task.update(status: 'uncomplete')
+    redirect_to @project, notice: 'Task uncompleted'
+  end
+
   def complete
-    @task.update(status: true)
+    @task.update(status: 'complete')
     redirect_to @project, notice: 'Task completed'
   end
 
-  def uncomplete
-    @task.update(status: false)
-    redirect_to @project, notice: 'Task uncompleted'
+  def prioritize
+    @task.update(status: 'prioritize')
+    redirect_to @project, notice: 'Task prioritized'
   end
 
   private
