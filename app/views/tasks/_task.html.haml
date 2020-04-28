@@ -20,11 +20,11 @@
           = form_for task, url: project_task_path(project, task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}", class: 'hidden' } do |f|
             .task-form-and-button
               = f.text_area :name, class: "form-control", placeholder: true, required: "required", id: "task-name-#{task.id}"
-              = f.submit "Confirm", class: "btn btn-primary"
+              = f.submit "Confirm", class: "btn btn-success"
     .dead-line
       = form_for [project, task], url: project_task_path(project, task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}" }  do |f|
         = f.text_field :deadline, id: "deadline-#{task.id}", class: "deadline", placeholder: "Select deadline", autocomplete: 'off'
-        = f.submit "Set", class: "btn btn-primary"
+        = f.submit "Set", class: "btn btn-success"
   .action
     .toggle
       %button.btn.btn-primary{"aria-controls" => "edit-task-#{task.id}"} Edit
