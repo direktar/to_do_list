@@ -1,0 +1,42 @@
+#task {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+#todo_tasks li {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+#todo_tasks li .complete {
+  width: 10%;
+}
+
+#todo_tasks li .middle-fields {
+  width: 70%;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+#todo_tasks li .action {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  width: 20%;
+  justify-content: space-around;
+}
