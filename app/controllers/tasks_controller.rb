@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.create!(task_params)
-    redirect_to @project
+    redirect_to root_path
   end
 
   def edit
@@ -31,22 +31,22 @@ class TasksController < ApplicationController
     else
       flash[:error] = 'Project task could not be deleted'
     end
-    redirect_to @project
+    redirect_to root_path
   end
 
   def uncomplete
     @task.update(status: 'uncomplete')
-    redirect_to @project, notice: 'Task uncompleted'
+    redirect_to root_path, notice: 'Task uncompleted'
   end
 
   def complete
     @task.update(status: 'complete')
-    redirect_to @project, notice: 'Task completed'
+    redirect_to root_path, notice: 'Task completed'
   end
 
   def prioritize
     @task.update(status: 'prioritize')
-    redirect_to @project, notice: 'Task prioritized'
+    redirect_to root_path, notice: 'Task prioritized'
   end
 
   private

@@ -1,7 +1,23 @@
-%h1 Listing projects
+-# %h1 Listing projects
 
-- @projects.each do |project|
-  %p= link_to project.name, project
-%br
+-# - @projects.each do |project|
+-#   %p= link_to project.name, project
+-# %br
+
+-# = link_to 'New Project', new_project_path
+
+
+%p#notice= notice
 
 = link_to 'New Project', new_project_path
+
+- @projects.each do |project|
+  %tr
+    %h1
+      = project.name
+      = link_to 'Edit', edit_project_path(project)
+      = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+  %ul#todo_tasks
+    = render partial: project.tasks.order('status DESC, name'), locals: { project: project }
+    #form
+      = render partial: "tasks/form", locals: { project: project }
