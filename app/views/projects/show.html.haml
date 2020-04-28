@@ -1,12 +1,14 @@
 %p#notice= notice
 
-= @project.name
+= link_to 'New Project', new_project_path
 
-%ul#todo_tasks
-  = render @project_tasks
-  #form
-    = render "/tasks/form"
-
-= link_to 'Edit', edit_project_path(@project)
-\|
-= link_to 'Back', projects_path
+- @projects.each do |project|
+  %tr
+    %h1
+      = project.name
+      = link_to 'Edit', edit_project_path(project)
+      = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+  %ul#todo_tasks
+    = render project.tasks
+    #form
+      = render "/tasks/form"
