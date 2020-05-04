@@ -4,6 +4,6 @@ $(document).on('turbolinks:load', function() {
       $('.flash').fadeOut('slow', function(){
         $(this).remove();
       })
-      },5555);
+      },1500);
   });
 })

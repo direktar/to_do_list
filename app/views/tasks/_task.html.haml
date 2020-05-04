@@ -1,6 +1,6 @@
 %li
   .body
-    - if task.status?
+    - unless task.status?
       = link_to complete_project_task_path(project, task.id), method: :patch do
         = render partial: "svgs/square"
     - else
@@ -24,5 +24,3 @@
       = link_to 'Edit', "#", class: "btn btn-primary toggle", "aria-controls" => "edit-task-#{task.id}"
     .task-delete
       = button_to 'Delete', project_task_path(project, task.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"
-
-
