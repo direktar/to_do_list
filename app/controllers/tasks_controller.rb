@@ -5,48 +5,41 @@ class TasksController < ApplicationController
   before_action :set_task, except: [:create]
 
   def create
-    @task = @project.tasks.create!(task_params)
+    @task = @project.tasks.build(task_params)
+    if @task.save
+      success
+    else
+      danger_with_errors(@task)
+    end
     redirect_to root_path
   end
 
-  def edit
-    render('tasks/form')
-  end
-
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_back fallback_location: @project, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { redirect_back fallback_location: @project, danger: 'Task is not updated.' }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    if @task.update(task_params)
+      success
+    else
+      danger_with_errors(@task)
     end
+    redirect_back fallback_location: @project
   end
 
   def destroy
     if @task.destroy
-      flash[:success] = 'Project task was deleted'
+      success
     else
-      flash[:error] = 'Project task could not be deleted'
+      flash[:danger] = "Task was successfully destroyed."
     end
     redirect_to root_path
   end
 
   def uncomplete
-    @task.update(status: 'uncomplete')
-    redirect_to root_path, notice: 'Task uncompleted'
+    @task.update(status: 'false')
+    redirect_to root_path, success: 'Task uncompleted'
   end
 
   def complete
-    @task.update(status: 'complete')
-    redirect_to root_path, notice: 'Task completed'
-  end
-
-  def prioritize
-    @task.update(status: 'prioritize')
-    redirect_to root_path, notice: 'Task prioritized'
+    @task.update(status: 'true')
+    redirect_to root_path, success: 'Task completed'
   end
 
   private

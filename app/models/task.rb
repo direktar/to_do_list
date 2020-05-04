@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
   belongs_to :project
-
-  enum status: %i[complete uncomplete prioritize]
+  validates_length_of :name, minimum: 10, maximum: 255
+  validates_presence_of :project_id
 end

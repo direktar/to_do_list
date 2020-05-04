@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery-ui")
+require("packs/flash_error")
 
 $(document).on('turbolinks:load', function() {
   // HIDE EDIT TASK

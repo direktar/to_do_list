@@ -6,7 +6,13 @@
   display: flex
 .hidden
   display: none
-#todo_tasks
+ul.todo_tasks
+  display: -webkit-flex
+  display: -moz-flex
+  display: -ms-flex
+  display: -o-flex
+  display: flex
+  flex-direction: column
   li
     display: -webkit-flex
     display: -moz-flex
@@ -16,21 +22,24 @@
     width: 100%
     justify-content: space-between
     margin: 10px 0
-    .complete
-      width: 10%
-    .middle-fields
-      width: 70%
+    background-color: #eee
+    padding: 10px
+    .body
       display: -webkit-flex
       display: -moz-flex
       display: -ms-flex
       display: -o-flex
       display: flex
-      justify-content: space-between
-    .action
+    .task-name
+      padding: 0 10px
+    .actions
       display: -webkit-flex
       display: -moz-flex
       display: -ms-flex
       display: -o-flex
       display: flex
-      width: 20%
-      justify-content: space-around
+      li
+        padding: 10px 0
+
+.task-input
+  padding: 10px 0

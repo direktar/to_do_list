@@ -1,23 +1,20 @@
--# %h1 Listing projects
+.projects
+  .header
+    %p To do list User.name
+    = render 'form'
 
--# - @projects.each do |project|
--#   %p= link_to project.name, project
--# %br
-
--# = link_to 'New Project', new_project_path
-
-
-%p#notice= notice
-
-= link_to 'New Project', new_project_path, class: "btn btn-success"
-
-- @projects.each do |project|
-  %tr
-    %h1
-      = project.name
-      = link_to 'Edit', edit_project_path(project), class: "btn btn-primary"
-      = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
-  %ul#todo_tasks
-    = render partial: project.tasks.order('status DESC, name'), locals: { project: project }
-    #form
-      = render partial: "tasks/form", locals: { project: project }
+  - @projects.each do |project|
+    .project
+      .project-header
+        .project-name
+          %h2= project.name
+          = form_for project, html: { id: "edit-project-#{project.id}", class: 'hidden' }  do |f|
+            = f.text_field :name
+            = f.submit "Save", class: "btn btn-success"
+        .project-buttons
+          = link_to 'Edit', "#", class: "btn btn-primary toggle", "aria-controls" => "edit-project-#{project.id}"
+          = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+      %ul.todo_tasks
+        = render partial: project.tasks.order('status DESC, name'), locals: { project: project }
+        #form
+          = render partial: "tasks/form", locals: { project: project }

@@ -11,4 +11,9 @@
   %body
     .container
       = yield
+    .flash
+      - flash.each do |name, message|
+        %div{:class => "alert #{name}"}
+          %h6
+            = message
     = console if Rails.env.development?

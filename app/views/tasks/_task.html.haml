@@ -1,34 +1,28 @@
 %li
-  .complete
-    - if task.uncomplete? || task.prioritize?
+  .body
+    - if task.status?
       = link_to complete_project_task_path(project, task.id), method: :patch do
         = render partial: "svgs/square"
     - else
       = link_to uncomplete_project_task_path(project, task.id), method: :patch do
         = render partial: "svgs/checked"
-    - if task.prioritize?
-      = link_to uncomplete_project_task_path(project, task.id), method: :patch do
-        = render partial: "svgs/star_fill"
-    - elsif task.prioritize? || task.uncomplete?
-      = link_to prioritize_project_task_path(project, task.id), method: :patch do
-        = render partial: "svgs/star"
-  .middle-fields
     .task-name
       %p
         = task.name
-        .task-edit-form
-          = form_for task, url: project_task_path(project, task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}", class: 'hidden' } do |f|
-            .task-form-and-button
-              = f.text_area :name, class: "form-control", placeholder: true, required: "required", id: "task-name-#{task.id}"
-              = f.submit "Confirm", class: "btn btn-success"
-    .dead-line
+      .task-edit-form
+        = form_for task, url: project_task_path(project, task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}", class: 'hidden' } do |f|
+          .task-form-and-button
+            = f.text_area :name, placeholder: true, required: "required", id: "task-name-#{task.id}"
+          = f.submit "Save", class: "btn btn-success"
+  .actions
+    .task-dead-line
       = form_for [project, task], url: project_task_path(project, task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}" }  do |f|
-        = f.text_field :deadline, id: "deadline-#{task.id}", class: "deadline", placeholder: "Select deadline", autocomplete: 'off'
-        = f.submit "Set", class: "btn btn-success"
-  .action
-    .toggle
-      %button.btn.btn-primary{"aria-controls" => "edit-task-#{task.id}"} Edit
-    .delete
+        = f.text_field :deadline, id: "deadline-#{task.id}", class: "deadline", placeholder: "Select deadline", autocomplete: 'off', size: 8
+        = f.submit "Set deadline", class: "btn btn-success"
+
+    .task-edit
+      = link_to 'Edit', "#", class: "btn btn-primary toggle", "aria-controls" => "edit-task-#{task.id}"
+    .task-delete
       = button_to 'Delete', project_task_path(project, task.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"
 
 
