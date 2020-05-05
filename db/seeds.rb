@@ -35,20 +35,24 @@ Task.create!(
 # Second profects tasks
 Task.create!(
   name: 'Buy a milk',
-  project_id: p2.id
+  project_id: p2.id,
+  user_id: u.id
 )
 
 Task.create!(
   name: 'Call Mam',
-  project_id: p2.id
+  project_id: p2.id,
+  user_id: u.id
 )
 
 Task.create!(
   name: 'Clean the room',
-  project_id: p2.id
+  project_id: p2.id,
+  user_id: u.id
 )
 
 Task.create!(
   name: 'Repair the DVD Player',
-  project_id: p2.id
+  project_id: p2.id,
+  user_id: u.id
 )
