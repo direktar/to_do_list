@@ -23,8 +23,12 @@ $(document).on('turbolinks:load', function() {
   })
 
   $(function () {
+    var nowDate = new Date();
     $('.deadline').datepicker({
-      dateFormat: 'yy-mm-dd'
+      minDate: nowDate,
+      todayHighlight: true,
+      autoclose: true,
+      dateFormat: 'dd-mm-yy'
     });
   });
 })

@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
   def sorting
     params[:task].each_with_index do |id, index|
-      @project.tasks.where(id: id).update_all({ position: index + 1 })
+      @project.tasks.where(id: id).update_all(position: index + 1)
     end
     render body: nil
   end
