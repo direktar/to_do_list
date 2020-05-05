@@ -13,11 +13,13 @@ gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '~> 4.2'
 gem 'webpacker', '~> 4.0'
+gem 'acts_as_list'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry-byebug'
 end
 
 group :development do

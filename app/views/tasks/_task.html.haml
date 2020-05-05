@@ -1,26 +1,26 @@
-%li
+%li{ id: "task-#{task.id}" }
   .body
     - unless task.status?
-      = link_to complete_project_task_path(project, task.id), method: :patch do
+      = link_to complete_project_task_path(task.project, task.id), method: :patch do
         = render partial: "svgs/square"
     - else
-      = link_to uncomplete_project_task_path(project, task.id), method: :patch do
+      = link_to uncomplete_project_task_path(task.project, task.id), method: :patch do
         = render partial: "svgs/checked"
     .task-name
       %p
         = task.name
       .task-edit-form
-        = form_for task, url: project_task_path(project, task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}", class: 'hidden' } do |f|
+        = form_for task, url: project_task_path(task.project, task.id), action: :update, method: :patch, html: { id: "task-edit-form-#{task.id}", class: 'hidden' } do |f|
           .task-form-and-button
             = f.text_area :name, placeholder: true, required: "required", id: "task-name-#{task.id}"
           = f.submit "Save", class: "btn btn-success"
   .actions
     .task-dead-line
-      = form_for [project, task], url: project_task_path(project, task.id), action: :update, method: :patch, html: { id: "edit-task-#{task.id}" }  do |f|
+      = form_for [task.project, task], url: project_task_path(task.project, task.id), action: :update, method: :patch, html: { id: "task-dead-line-#{task.id}" }  do |f|
         = f.text_field :deadline, id: "deadline-#{task.id}", class: "deadline", placeholder: "Select deadline", autocomplete: 'off', size: 8
         = f.submit "Set deadline", class: "btn btn-success"
 
     .task-edit
-      = link_to 'Edit', "#", class: "btn btn-primary toggle", "aria-controls" => "edit-task-#{task.id}"
+      = link_to 'Edit', "#", class: "btn btn-primary toggle", "aria-controls" => "task-edit-form-#{task.id}"
     .task-delete
-      = button_to 'Delete', project_task_path(project, task.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"
+      = button_to 'Delete', project_task_path(task.project, task.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"

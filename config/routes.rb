@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         patch :complete
         patch :prioritize
       end
+      post :sorting, on: :collection
     end
   end
 

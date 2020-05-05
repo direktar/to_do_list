@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: %i[update destroy]
 
   def index
     @projects = Project.order("updated_at DESC")
@@ -27,8 +27,6 @@ class ProjectsController < ApplicationController
     redirect_to root_path
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
     if @project.destroy
       success
@@ -39,12 +37,11 @@ class ProjectsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_project
     @project = Project.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def project_params
     params.fetch(:project, {}).permit(:name)
   end
