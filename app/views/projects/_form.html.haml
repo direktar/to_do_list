@@ -1,4 +1,5 @@
 = form_for Project.new do |f|
+  = hidden_field :user_id, current_user.id
   = f.text_field :name, size: 30, required: true, placeholder: "Enter at least 6 symbols max 120"
 
   = f.submit "Create project", class: "btn btn-success"

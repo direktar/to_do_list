@@ -4,12 +4,12 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[update destroy]
 
   def index
-    @projects = Project.order("updated_at DESC")
+    @projects = current_user.projects.order("updated_at DESC") if user_signed_in?
   end
 
   def create
     @project = Project.new(project_params)
-
+    @project.user = current_user
     if @project.save
       success
     else

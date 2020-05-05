@@ -14,6 +14,7 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '~> 4.2'
 gem 'webpacker', '~> 4.0'
 gem 'acts_as_list'
+gem 'devise'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
