@@ -3,7 +3,7 @@
 Project.delete_all
 Task.delete_all
 
-u = User.create!(name: 'Test user', email: "test@test.com", password: '12345678', password_confirmation: '12345678')
+u = User.create!(email: "test@test.com", password: '12345678', password_confirmation: '12345678')
 
 p1 = Project.create!(name: 'Complete the test task for ruby Garage', user_id: u.id)
 p2 = Project.create!(name: 'For Home', user_id: u.id)

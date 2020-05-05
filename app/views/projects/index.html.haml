@@ -25,10 +25,9 @@
           = render partial: "tasks/form", locals: { project: project }
 - else
   .projects
-    .alert
-      %p
-        Log in please
-        = link_to "Log in", new_user_session_path
-      %p
-        Or create account
-        = link_to "Create user", new_user_registration_path
+    %p
+      Log in please
+      = link_to "Log in", new_user_session_path
+    %p
+      Or create account
+      = link_to "Create user", new_user_registration_path
