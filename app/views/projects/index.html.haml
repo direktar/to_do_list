@@ -2,10 +2,9 @@
   .projects
     .header
       .user-nav
-        - if user_signed_in?
-          %p= "To do list #{current_user.email}"
-          %p= link_to "Edit user information", edit_user_registration_path
-          %p= link_to "Log out", destroy_user_session_path, method: :delete
+        %p= "To do list #{current_user.email}"
+        %p= link_to "Edit user information", edit_user_registration_path
+        %p= link_to "Log out", destroy_user_session_path, method: :delete
       = render 'form'
 
     - @projects.each do |project|
@@ -26,7 +25,7 @@
 - else
   .projects
     %p
-      Log in please
+      Please
       = link_to "Log in", new_user_session_path
     %p
       Or create account
