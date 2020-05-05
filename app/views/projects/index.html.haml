@@ -15,6 +15,6 @@
           = link_to 'Edit', "#", class: "btn btn-primary toggle", "aria-controls" => "edit-project-#{project.id}"
           = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
       %ul.todo-tasks{ "data-update-url" => "#{sorting_project_tasks_url(project)}" }
-        = render project.tasks.order('status ASC, position')
+        = render partial: "tasks/task", collection: project.tasks
       #form
         = render partial: "tasks/form", locals: { project: project }

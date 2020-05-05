@@ -6,14 +6,15 @@
     - else
       = link_to uncomplete_project_task_path(task.project, task.id), method: :patch do
         = render partial: "svgs/checked"
-    .task-name
-      %p
-        = task.name
-      .task-edit-form
-        = form_for task, url: project_task_path(task.project, task.id), action: :update, method: :patch, html: { id: "task-edit-form-#{task.id}", class: 'hidden' } do |f|
-          .task-form-and-button
-            = f.text_area :name, placeholder: true, required: "required", id: "task-name-#{task.id}"
-          = f.submit "Save", class: "btn btn-success"
+    %span.drag
+      drag
+  .task-name
+    = task.name
+    .task-edit-form
+      = form_for task, url: project_task_path(task.project, task.id), action: :update, method: :patch, html: { id: "task-edit-form-#{task.id}", class: 'hidden' } do |f|
+        .task-form-and-button
+          = f.text_area :name, placeholder: true, required: "required", id: "task-name-#{task.id}"
+        = f.submit "Save", class: "btn btn-success"
   .actions
     .task-dead-line
       = form_for [task.project, task], url: project_task_path(task.project, task.id), action: :update, method: :patch, html: { id: "task-dead-line-#{task.id}" }  do |f|
