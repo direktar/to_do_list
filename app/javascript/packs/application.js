@@ -12,8 +12,8 @@ require("packs/flash_error")
 require("packs/sortable")
 
 $(document).on('turbolinks:load', function() {
-  // HIDE EDIT TASK
 
+  // HIDE EDIT TASK
   $(document).ready(()=> {
     $('.toggle').on('click', (e)=> {
       e.stopPropagation();
