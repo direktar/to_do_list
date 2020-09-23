@@ -24,30 +24,15 @@ class TasksController < ApplicationController
   def create
     @task = @project.tasks.build(task_params)
     @task.user = current_user
-    if @task.save
-      success
-    else
-      danger_with_errors(@task)
-    end
-    redirect_to root_path
+    action_status(@task.save, @task)
   end
 
   def update
-    if @task.update(task_params)
-      success
-    else
-      danger_with_errors(@task)
-    end
-    redirect_back fallback_location: root_path
+    action_status(@task.update(task_params), @task)
   end
 
   def destroy
-    if @task.destroy
-      success
-    else
-      flash[:danger] = "Task was successfully destroyed."
-    end
-    redirect_to root_path
+    action_status(@task.destroy, @task)
   end
 
   private

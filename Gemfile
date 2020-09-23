@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.6.5'
 
 gem 'bootstrap', '~> 4.4.1'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
@@ -21,6 +20,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 4.0.1'
+  gem 'factory_bot_rails'
 end
 
 group :development do

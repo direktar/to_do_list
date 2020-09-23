@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  add_flash_types :success, :danger, :errors
+
+  def action_status(action, operation_name)
+    if action
+      success
+    else
+      danger_with_errors(operation_name)
+    end
+    redirect_to root_path
+  end
 
   private
 
@@ -9,9 +17,8 @@ class ApplicationController < ActionController::Base
     flash[:success] = "#{controller_name.singularize.capitalize} was successfully #{action_name}."
   end
 
-  def danger_with_errors(model_name)
+  def danger_with_errors(operation_name)
     flash[:danger] = "#{controller_name.singularize.capitalize} is not #{action_name}."
-    flash[:errors] = model_name.errors.full_messages.join(', ')
+    flash[:errors] = operation_name.errors.full_messages.join(', ')
   end
-
 end

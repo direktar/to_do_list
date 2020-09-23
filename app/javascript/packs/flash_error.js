@@ -3,5 +3,5 @@ $(document).on('turbolinks:load', function() {
     $('.flash').fadeOut('slow', function(){
       $(this).remove();
     })
-    },1500);
+    },3000);
 });

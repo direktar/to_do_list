@@ -4,36 +4,20 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[update destroy]
 
   def index
-    @projects = current_user.projects.order("updated_at DESC") if user_signed_in?
+    @projects = current_user.projects.order(updated_at: :desc) if user_signed_in?
   end
 
   def create
-    @project = Project.new(project_params)
-    @project.user = current_user
-    if @project.save
-      success
-    else
-      danger_with_errors(@project)
-    end
-    redirect_to root_path
+    @project = current_user.projects.build(project_params)
+    action_status(@project.save, @project)
   end
 
   def update
-    if @project.update(project_params)
-      success
-    else
-      danger_with_errors
-    end
-    redirect_to root_path
+    action_status(@project.update(project_params), @project)
   end
 
   def destroy
-    if @project.destroy
-      success
-    else
-      flash[:danger] = "Project was successfully destroyed."
-    end
-    redirect_to root_url
+    action_status(@project.destroy, @project)
   end
 
   private
