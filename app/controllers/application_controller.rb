@@ -2,12 +2,8 @@
 
 class ApplicationController < ActionController::Base
 
-  def action_status(action, operation_name)
-    if action
-      success
-    else
-      danger_with_errors(operation_name)
-    end
+  def action_status(action, object)
+    action ? success : danger_with_errors(object)
     redirect_to root_path
   end
 
@@ -17,8 +13,8 @@ class ApplicationController < ActionController::Base
     flash[:success] = "#{controller_name.singularize.capitalize} was successfully #{action_name}."
   end
 
-  def danger_with_errors(operation_name)
+  def danger_with_errors(object)
     flash[:danger] = "#{controller_name.singularize.capitalize} is not #{action_name}."
-    flash[:errors] = operation_name.errors.full_messages.join(', ')
+    flash[:errors] = object.errors.full_messages.join(', ')
   end
 end

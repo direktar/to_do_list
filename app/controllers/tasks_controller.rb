@@ -2,7 +2,8 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i[complete uncomplete update destroy]
-  before_action :set_project
+  # anofnaosfn
+  before_action :set_project, only: :create
 
   def complete
     @task.update(status: 'true')
@@ -14,7 +15,7 @@ class TasksController < ApplicationController
     redirect_to root_path, success: 'Task uncompleted'
   end
 
-  def sorting
+  def update_position
     params[:task].each_with_index do |id, index|
       @project.tasks.where(id: id).update(position: index + 1)
     end
