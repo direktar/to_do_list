@@ -4,7 +4,8 @@ class CreateTasks < ActiveRecord::Migration[6.0]
       t.string     :name, limit: 255, null: false
       t.boolean    :status, default: false
       t.string     :deadline
-      t.references :project
+      t.references :project, index: true
+
 
       t.timestamps
     end

@@ -2,7 +2,6 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i[complete uncomplete update destroy]
-  # anofnaosfn
   before_action :set_project, only: :create
 
   def complete
@@ -24,7 +23,6 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.build(task_params)
-    @task.user = current_user
     action_status(@task.save, @task)
   end
 
@@ -47,6 +45,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.fetch(:task, {}).permit(:name, :status, :project_id, :deadline, :position)
+    params.require(:task).permit(:name, :status, :project_id, :deadline, :position)
   end
 end

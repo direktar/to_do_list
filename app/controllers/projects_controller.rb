@@ -4,7 +4,11 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[update destroy]
 
   def index
-    @projects = current_user.projects.order(updated_at: :desc) if user_signed_in?
+    unless user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
+    @projects = current_user.projects.order(updated_at: :desc)
   end
 
   def create
@@ -27,6 +31,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.fetch(:project, {}).permit(:name)
+    params.require(:project).permit(:name, :user_id)
   end
 end
