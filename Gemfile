@@ -2,12 +2,12 @@
 
 source 'https://rubygems.org'
 
-gem 'acts_as_list'
+gem 'acts_as_list', '~> 1.0', '>= 1.0.2'
 gem 'bootstrap', '~> 4.4.1'
-gem 'devise'
+gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 gem 'jbuilder', '~> 2.7'
-gem 'pg', '>= 0.18', '< 2.0'
+gem 'pg', '~> 1.2', '>= 1.2.3'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
@@ -19,9 +19,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'capybara'
-  gem 'factory_bot_rails'
-  gem 'pry-byebug'
+  gem 'capybara', '~> 3.33'
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'pry-byebug', '~> 3.9'
   gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers', '~> 4.0'
 end

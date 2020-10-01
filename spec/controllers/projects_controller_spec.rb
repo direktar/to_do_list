@@ -3,6 +3,7 @@ require 'rails_helper'
 describe ProjectsController do
   describe '#index' do
     it 'should return success response' do
+      sign_in create(:user)
       get :index
       expect(response).to have_http_status(:ok)
     end
